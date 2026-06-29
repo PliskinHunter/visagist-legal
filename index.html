@@ -19,7 +19,20 @@
     .container { max-width: 480px; width: 100%; text-align: center; }
     .app-name { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #8B44D4; margin-bottom: 16px; }
     h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-    p { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 36px; }
+    p.sub { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 32px; }
+    .lang-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+    .lang-tab {
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #333;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+    .lang-tab.active { background: #8B44D4; border-color: #8B44D4; color: #fff; }
     .links { display: flex; flex-direction: column; gap: 12px; }
     a.card {
       display: block;
@@ -40,8 +53,14 @@
   <div class="container">
     <div class="app-name">Visagist Haircuts</div>
     <h1>Legal Documents</h1>
-    <p>Official policies for the Visagist Haircuts app (com.visagist.haircuts)</p>
-    <div class="links">
+    <p class="sub">Official policies for the Visagist Haircuts app (com.visagist.haircuts)</p>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="setLang('en')">🇬🇧 English</button>
+      <button class="lang-tab" onclick="setLang('es')">🇪🇸 Español</button>
+    </div>
+
+    <div class="links" id="links-en">
       <a class="card" href="./privacy-policy.html">
         <h2>Privacy Policy</h2>
         <p>How we collect, use, and protect your data</p>
@@ -51,7 +70,29 @@
         <p>Rules and guidelines for using the App</p>
       </a>
     </div>
+
+    <div class="links" id="links-es" style="display:none;">
+      <a class="card" href="./privacy-policy-es.html">
+        <h2>Política de Privacidad</h2>
+        <p>Cómo recopilamos, usamos y protegemos tus datos</p>
+      </a>
+      <a class="card" href="./terms-and-conditions-es.html">
+        <h2>Términos y Condiciones</h2>
+        <p>Reglas y pautas para usar la App</p>
+      </a>
+    </div>
+
     <footer>© 2026 Visagist Haircuts · <a href="mailto:oteizanagi@gmail.com" style="color:rgba(255,255,255,0.3);">oteizanagi@gmail.com</a></footer>
   </div>
+
+  <script>
+    function setLang(lang) {
+      document.getElementById('links-en').style.display = lang === 'en' ? 'flex' : 'none';
+      document.getElementById('links-es').style.display = lang === 'es' ? 'flex' : 'none';
+      document.querySelectorAll('.lang-tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'es'));
+      });
+    }
+  </script>
 </body>
 </html>
